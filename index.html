@@ -1,0 +1,35 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="input">
+                <div id="goal">
+                    <form id="goalForm">
+                        <h1>Goal</h1>
+                        <label>
+                            X
+                            <input class="goalInput" id="goalX" type="number" placeholder="0">
+                        </label>
+                        <br>
+                        <label>
+                            Y
+                            <input class="goalInput" id="goalY" type="number" placeholder="0">
+                        </label>
+                        <br>
+                        <button id="goalSubmit" type="submit">Create goal</button>
+                    </form>
+                </div>
+            </div>
+            <div id="goalListDiv">
+                <h1>Goals:</h1>
+                <ul id="goalList"></ul>
+            </div>
+        </div>
+        <div id="canvas"></div>
+        <button id="exportButton" type="button">Export</button>
+        <script src="script.js"></script>
+    </body>
+    </html>
