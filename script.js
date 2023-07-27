@@ -2,8 +2,8 @@ var canvas = document.getElementById('canvas');
 
 var goalArray = new Array();
 
-function scaleValue(value, oldRange, newRange) {
-    return (value / oldRange) * newRange;
+function scaleValue(value, scale) {
+    return value / scale;
 }
 
 function exportJSON(){
@@ -36,15 +36,19 @@ function createDot(x, y){
     dot.style.top = `${y-2.5}px`;
     dot.className = 'dot';
 
+    x = Math.round(scaleValue(x, 0.2));
+    y = Math.round(scaleValue(y, 0.2));
+
     canvas.appendChild(dot);
     addDotToList(x, y);
 
-    goalArray.push([Math.round(scaleValue(x, 800, 4000)), Math.round(scaleValue(y, 400, 2000))]);
+    goalArray.push([x, y]);
 }
 
 canvas.addEventListener('click', function(event) {
     var x = event.clientX - canvas.getBoundingClientRect().left;
     var y = event.clientY - canvas.getBoundingClientRect().top;
+
     createDot(x, y);
 });
 
@@ -56,7 +60,7 @@ loginForm.addEventListener("submit", (e) => {
     let x = document.getElementById("goalX").value;
     let y = document.getElementById("goalY").value;
 
-    createDot(scaleValue(x, 4000, 800), scaleValue(y, 2000, 400));
+    createDot(scaleValue(x, 5), scaleValue(y, 5));
 });
 
 let exportButton = document.getElementById('exportButton');
