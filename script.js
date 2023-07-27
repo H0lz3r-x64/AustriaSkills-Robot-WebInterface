@@ -2,6 +2,9 @@ var canvas = document.getElementById('canvas');
 
 var goalArray = new Array();
 
+let upScale = 5;
+let downScale = 0.2;
+
 function scaleValue(value, scale) {
     return value / scale;
 }
@@ -36,8 +39,8 @@ function createDot(x, y){
     dot.style.top = `${y-2.5}px`;
     dot.className = 'dot';
 
-    x = Math.round(scaleValue(x, 0.2));
-    y = Math.round(scaleValue(y, 0.2));
+    x = Math.round(scaleValue(x, downScale));
+    y = Math.round(scaleValue(y, downScale));
 
     canvas.appendChild(dot);
     addDotToList(x, y);
@@ -60,7 +63,7 @@ loginForm.addEventListener("submit", (e) => {
     let x = document.getElementById("goalX").value;
     let y = document.getElementById("goalY").value;
 
-    createDot(scaleValue(x, 5), scaleValue(y, 5));
+    createDot(scaleValue(x, upScale), scaleValue(y, upScale));
 });
 
 let exportButton = document.getElementById('exportButton');
