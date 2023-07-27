@@ -56,7 +56,7 @@ loginForm.addEventListener("submit", (e) => {
     let x = document.getElementById("goalX").value;
     let y = document.getElementById("goalY").value;
 
-    createDot(x, y);
+    createDot(scaleValue(x, 4000, 800), scaleValue(y, 2000, 400));
 });
 
 let exportButton = document.getElementById('exportButton');
