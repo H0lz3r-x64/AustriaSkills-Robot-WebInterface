@@ -1,6 +1,9 @@
-var canvas = document.getElementById('canvas');
+var canvasContainer = document.getElementById('canvasContainer');
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
 
 var goalArray = new Array();
+var wallArray = new Array();
 
 let upScale = 5;
 let downScale = 0.2;
@@ -11,7 +14,8 @@ function scaleValue(value, scale) {
 
 function exportJSON(){
     let data = {
-        goals: goalArray
+        goals: goalArray,
+        walls: wallArray
     }
 
     let jsonStr = JSON.stringify(data, null, 2);
@@ -37,27 +41,35 @@ function createDot(x, y){
     var dot = document.createElement('div');
     dot.style.left = `${x-2.5}px`;
     dot.style.top = `${y-2.5}px`;
+
     dot.className = 'dot';
+
+    var textElement = document.createElement('span');
+    textElement.textContent = goalArray.length;
+    textElement.style.fontSize = "10px";
+    textElement.style.color = "green";
+
+    dot.appendChild(textElement);
 
     x = Math.round(scaleValue(x, downScale));
     y = Math.round(scaleValue(y, downScale));
 
-    canvas.appendChild(dot);
+    canvasContainer.appendChild(dot);
     addDotToList(x, y);
 
-    goalArray.push([x, y]);
+    goalArray.push([x, y, goalArray.length]);
 }
 
-canvas.addEventListener('click', function(event) {
-    var x = event.clientX - canvas.getBoundingClientRect().left;
-    var y = event.clientY - canvas.getBoundingClientRect().top;
+canvasContainer.addEventListener('click', function(event) {
+    var x = event.clientX - canvasContainer.getBoundingClientRect().left;
+    var y = event.clientY - canvasContainer.getBoundingClientRect().top;
 
     createDot(x, y);
 });
 
-let loginForm = document.getElementById("goalForm")
+let goalForm = document.getElementById("goalForm")
 
-loginForm.addEventListener("submit", (e) => {
+goalForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let x = document.getElementById("goalX").value;
@@ -70,4 +82,20 @@ let exportButton = document.getElementById('exportButton');
 
 exportButton.addEventListener('click', function() {
     exportJSON();
+});
+
+let wallForm = document.getElementById("wallForm");
+
+wallForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let startX = document.getElementById("startX").value;
+    let startY = document.getElementById("startY").value;
+    let width = document.getElementById("endX").value - startX;
+    let height = document.getElementById("endY").value - startY;
+
+    ctx.fillRect(startX, startY, width, height);
+
+    wallArray.push([startX, startY, width, height]);
+
 });

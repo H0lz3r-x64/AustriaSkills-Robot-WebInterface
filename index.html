@@ -11,24 +11,51 @@
                         <h1>Goal</h1>
                         <label>
                             X
-                            <input class="goalInput" id="goalX" type="number" placeholder="0" max="4000">
+                            <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
                         </label>
                         <br>
                         <label>
                             Y
-                            <input class="goalInput" id="goalY" type="number" placeholder="0" max="2000">
+                            <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
                         </label>
                         <br>
-                        <button id="goalSubmit" type="submit">Create goal</button>
+                        <button class="submitForm" type="submit">Create goal</button>
                     </form>
                 </div>
+                <form id="wallForm">
+                    <h1>Wall</h1>
+                    <label>
+                        Start X
+                        <input class="coordinateInput" id="startX" type="number" placeholder="0" max="4000" required>
+                    </label>
+                    <br>
+                    <label>
+                        Start Y
+                        <input class="coordinateInput" id="startY" type="number" placeholder="0" max="2000" required>
+                    </label>
+                    <br>
+                    <br>
+                    <label>
+                        End X
+                        <input class="coordinateInput" id="endX" type="number" placeholder="0" max="4000" required>
+                    </label>
+                    <br>
+                    <label>
+                        End Y
+                        <input class="coordinateInput" id="endY" type="number" placeholder="0" max="2000" required>
+                    </label>
+                    <br>
+                    <button class="submitForm" type="submit">Create wall</button>
+                </form>
             </div>
             <div id="goalListDiv">
                 <h1>Goals:</h1>
                 <ul id="goalList"></ul>
             </div>
         </div>
-        <div id="canvas"></div>
+        <div id="canvasContainer">
+            <canvas id="canvas" width="800" height="400"></canvas>
+        </div>
         <button id="exportButton" type="button">Export</button>
         <script src="script.js"></script>
     </body>
