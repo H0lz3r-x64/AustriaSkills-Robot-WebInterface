@@ -62,23 +62,7 @@ function createDot(x, y){
     goalArray.push([x, y, goalArray.length]);
 }
 
-canvasContainer.addEventListener('click', function(event) {
-    var x = event.clientX - canvasContainer.getBoundingClientRect().left;
-    var y = event.clientY - canvasContainer.getBoundingClientRect().top;
-
-    createDot(x, y);
-});
-
-let goalForm = document.getElementById("goalForm")
-
-goalForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let x = document.getElementById("goalX").value;
-    let y = document.getElementById("goalY").value;
-
-    createDot(scaleValue(x, upScale), scaleValue(y, upScale));
-
+function postGoal(x, y){
     const url = "http://10.12.34.2:3000/add_goal";
     const data = {
         X: x,
@@ -97,6 +81,27 @@ goalForm.addEventListener("submit", (e) => {
     .catch(error => {
         console.error("Error:", error);
     });
+}
+
+canvasContainer.addEventListener('click', function(event) {
+    var x = event.clientX - canvasContainer.getBoundingClientRect().left;
+    var y = event.clientY - canvasContainer.getBoundingClientRect().top;
+
+    createDot(x, y);
+    postGoal(scaleValue(x, downScale), scaleValue(y, downScale));
+});
+
+let goalForm = document.getElementById("goalForm")
+
+goalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let x = document.getElementById("goalX").value;
+    let y = document.getElementById("goalY").value;
+
+    createDot(scaleValue(x, upScale), scaleValue(y, upScale));
+
+    postGoal(x, y);
 });
 
 let exportButton = document.getElementById('exportButton');
