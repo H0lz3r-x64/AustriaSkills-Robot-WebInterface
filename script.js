@@ -78,6 +78,25 @@ goalForm.addEventListener("submit", (e) => {
     let y = document.getElementById("goalY").value;
 
     createDot(scaleValue(x, upScale), scaleValue(y, upScale));
+
+    const url = "http://10.12.34.2:3000/add_goal";
+    const data = {
+        X: x,
+        Y: y
+    };
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    
+    })
+    .then(response => response.json())
+    .catch(error => {
+        console.error("Error:", error);
+    });
 });
 
 let exportButton = document.getElementById('exportButton');
@@ -133,9 +152,6 @@ robotForm.addEventListener("submit", (e) => {
     
     })
     .then(response => response.json())
-    .then(data => {
-        console.log("Response from server:", data);
-    })
     .catch(error => {
         console.error("Error:", error);
     });
