@@ -43,4 +43,12 @@
 
 #wallForm{
     margin-left: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+#pickupForm{
+    margin-left: 100px;
+    display: flex;
+    flex-direction: column;
 }

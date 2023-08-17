@@ -4,6 +4,7 @@ var ctx = canvas.getContext("2d");
 
 var goalArray = new Array();
 var wallArray = new Array();
+var pointArray = new Array();
 
 let upScale = 5;
 let downScale = 0.2;
@@ -15,7 +16,8 @@ function scaleValue(value, scale) {
 function exportJSON(){
     let data = {
         goals: goalArray,
-        walls: wallArray
+        walls: wallArray,
+        pickups: pointArray
     }
 
     let jsonStr = JSON.stringify(data, null, 2);
@@ -89,13 +91,74 @@ let wallForm = document.getElementById("wallForm");
 wallForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let startX = document.getElementById("startX").value;
-    let startY = document.getElementById("startY").value;
-    let width = document.getElementById("endX").value - startX;
-    let height = document.getElementById("endY").value - startY;
+    let startX = scaleValue(document.getElementById("startX").value, upScale);
+    let startY = scaleValue(document.getElementById("startY").value, upScale);
+    let endX = scaleValue(document.getElementById("endX").value, upScale);
+    let endY = scaleValue(document.getElementById("endY").value, upScale);
+    let width = parseInt(document.getElementById("wallWidth").value);
 
-    ctx.fillRect(startX, startY, width, height);
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(endX, endY);
 
-    wallArray.push([startX, startY, width, height]);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = width;
 
+    ctx.stroke();
+    ctx.closePath();
+
+    wallArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale), width]);
+});
+
+let pointForm = document.getElementById("pickupForm");
+
+pointForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let x = scaleValue(document.getElementById("pickupX").value, upScale);
+    let y = scaleValue(document.getElementById("pickupY").value, upScale);
+    let rotation = parseInt(document.getElementById("pickupRot").value);
+
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, y, 8, 8);
+
+    let centerX = x + 4;
+    let centerY = y + 4;
+
+    let distanceFromRect = 5;
+    let offsetX = distanceFromRect * Math.cos(rotation * Math.PI / 180);
+    let offsetY = distanceFromRect * Math.sin(rotation * Math.PI / 180);
+
+    let arrowStartX = centerX - offsetX;
+    let arrowStartY = centerY - offsetY;
+
+    let arrowLength = 20;
+    let endX = arrowStartX - arrowLength * Math.cos(rotation * Math.PI / 180);
+    let endY = arrowStartY - arrowLength * Math.sin(rotation * Math.PI / 180);
+
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(arrowStartX, arrowStartY);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+
+    let arrowheadLength = 10;
+    let angle1 = (rotation - 30) * Math.PI / 180;
+    let angle2 = (rotation + 30) * Math.PI / 180;
+
+    let arrowheadX1 = arrowStartX - arrowheadLength * Math.cos(angle1);
+    let arrowheadY1 = arrowStartY - arrowheadLength * Math.sin(angle1);
+    let arrowheadX2 = arrowStartX - arrowheadLength * Math.cos(angle2);
+    let arrowheadY2 = arrowStartY - arrowheadLength * Math.sin(angle2);
+
+    ctx.beginPath();
+    ctx.moveTo(arrowStartX, arrowStartY);
+    ctx.lineTo(arrowheadX1, arrowheadY1);
+    ctx.moveTo(arrowStartX, arrowStartY);
+    ctx.lineTo(arrowheadX2, arrowheadY2);
+    ctx.stroke();
+
+
+    pointArray.push([scaleValue(x, downScale), scaleValue(y, downScale), rotation]);
 });

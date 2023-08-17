@@ -11,13 +11,13 @@
                         <h1>Goal</h1>
                         <label>
                             X
-                            <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
                         </label>
+                        <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
                         <br>
                         <label>
                             Y
-                            <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
                         </label>
+                        <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
                         <br>
                         <button class="submitForm" type="submit">Create goal</button>
                     </form>
@@ -26,26 +26,50 @@
                     <h1>Wall</h1>
                     <label>
                         Start X
-                        <input class="coordinateInput" id="startX" type="number" placeholder="0" max="4000" required>
                     </label>
+                    <input class="coordinateInput" id="startX" type="number" placeholder="0" max="4000" required>
                     <br>
                     <label>
                         Start Y
-                        <input class="coordinateInput" id="startY" type="number" placeholder="0" max="2000" required>
                     </label>
+                    <input class="coordinateInput" id="startY" type="number" placeholder="0" max="2000" required>
                     <br>
                     <br>
                     <label>
                         End X
-                        <input class="coordinateInput" id="endX" type="number" placeholder="0" max="4000" required>
                     </label>
+                    <input class="coordinateInput" id="endX" type="number" placeholder="0" max="4000" required>
                     <br>
                     <label>
                         End Y
-                        <input class="coordinateInput" id="endY" type="number" placeholder="0" max="2000" required>
                     </label>
+                    <input class="coordinateInput" id="endY" type="number" placeholder="0" max="2000" required>
+                    <br>
+                    <label>
+                        Width
+                    </label>
+                    <input class="coordinateInput" id="wallWidth" type="number" placeholder="1" required>
                     <br>
                     <button class="submitForm" type="submit">Create wall</button>
+                </form>
+                <form id="pickupForm">
+                    <h1>Point</h1>
+                    <label>
+                        X
+                    </label>
+                    <input class="coordinateInput" id="pickupX" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        Y
+                    </label>
+                    <input class="coordinateInput" id="pickupY" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        Rotation
+                    </label>
+                    <input class="coordinateInput" id="pickupRot" type="number" placeholder="0" max="360" required>
+                    <br>
+                    <button class="submitForm" type="submit">Create point</button>
                 </form>
             </div>
             <div id="goalListDiv">
@@ -58,5 +82,6 @@
         </div>
         <button id="exportButton" type="button">Export</button>
         <script src="script.js"></script>
+        <script src="robot_comms.js"></script>
     </body>
     </html>
