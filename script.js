@@ -110,6 +110,38 @@ wallForm.addEventListener("submit", (e) => {
     wallArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale), width]);
 });
 
+let robotForm = document.getElementById("robotForm");
+
+robotForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    var x = document.getElementById("robotX").value;
+    var y = document.getElementById("robotY").value;
+
+    const url = "http://10.12.34.2:3000/robot_location";
+    const data = {
+        X: x,
+        Y: y
+    };
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from server:", data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
+});
+
 let pointForm = document.getElementById("pickupForm");
 
 pointForm.addEventListener("submit", (e) => {
