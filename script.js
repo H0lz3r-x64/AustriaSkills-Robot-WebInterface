@@ -6,6 +6,7 @@ var goalArray = new Array();
 var wallArray = new Array();
 var pointArray = new Array();
 var qrAreaArray = new Array();
+var goalsToPost = new Queue();
 
 let upScale = 5;
 let downScale = 0.2;
@@ -82,7 +83,7 @@ function addDotToList(x, y){
     list.appendChild(item);
 }
 
-function createDot(x, y){
+function createGoal(x, y){
     var dot = document.createElement('div');
     dot.style.left = `${x-2.5}px`;
     dot.style.top = `${y-2.5}px`;
@@ -103,6 +104,8 @@ function createDot(x, y){
     addDotToList(x, y);
 
     goalArray.push([x, y, goalArray.length]);
+
+    goalsToPost.enqueue([x, y]);
 }
 
 function postGoal(x, y){
@@ -130,8 +133,7 @@ canvasContainer.addEventListener('click', function(event) {
     var x = event.clientX - canvasContainer.getBoundingClientRect().left;
     var y = event.clientY - canvasContainer.getBoundingClientRect().top;
 
-    createDot(x, y);
-    postGoal(scaleValue(x, downScale), scaleValue(y, downScale));
+    createGoal(x, y);
 });
 
 let goalForm = document.getElementById("goalForm")
@@ -142,9 +144,7 @@ goalForm.addEventListener("submit", (e) => {
     let x = document.getElementById("goalX").value;
     let y = document.getElementById("goalY").value;
 
-    createDot(scaleValue(x, upScale), scaleValue(y, upScale));
-
-    postGoal(x, y);
+    createGoal(scaleValue(x, upScale), scaleValue(y, upScale));
 });
 
 let exportButton = document.getElementById('exportButton');
@@ -199,11 +199,9 @@ qrForm.addEventListener("submit", (e) => {
 
     qrAreaArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale)]);
 
-    createDot(startX, startY);
-    postGoal(scaleValue(startX, downScale), scaleValue(startY, downScale));
+    createGoal(startX, startY);
 
-    createDot(endX, endY);
-    postGoal(scaleValue(endX, downScale), scaleValue(endY, downScale));
+    createGoal(endX, endY);
 });
 
 let robotForm = document.getElementById("robotForm");
@@ -289,4 +287,14 @@ pointForm.addEventListener("submit", (e) => {
     drawPickupPoint(x, y, rotation);
 
     pointArray.push([scaleValue(x, downScale), scaleValue(y, downScale), rotation]);
+});
+
+let startButton = document.getElementById("startButton");
+
+startButton.addEventListener('click', function(event){
+    while(!goalsToPost.isEmpty){
+        var goal = goalsToPost.dequeue();
+
+        postGoal(goal[0], goal[1]);
+    }
 });
