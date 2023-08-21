@@ -90,6 +90,31 @@
                     <br>
                     <button class="submitForm" type="submit">Set robot position</button>
                 </form>
+                <form id="qrCodeForm">
+                    <h1>QR code area</h1>
+                    <label>
+                        Start X
+                    </label>
+                    <input class="coordinateInput" id="qrstartX" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        Start Y
+                    </label>
+                    <input class="coordinateInput" id="qrstartY" type="number" placeholder="0" max="2000" required>
+                    <br>
+                    <br>
+                    <label>
+                        End X
+                    </label>
+                    <input class="coordinateInput" id="qrendX" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        End Y
+                    </label>
+                    <input class="coordinateInput" id="qrendY" type="number" placeholder="0" max="2000" required>
+                    <br>
+                    <button class="submitForm" type="submit">Create QR Code Area</button>
+                </form>
             </div>
             <div id="goalListDiv">
                 <h1>Goals:</h1>
