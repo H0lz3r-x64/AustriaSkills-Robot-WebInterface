@@ -36,6 +36,24 @@ function redraw(){
     pointArray.forEach(function(point) {
         drawPickupPoint(scaleValue(point[0], upScale), scaleValue(point[1], upScale), point[2])
     });
+
+    qrAreaArray.forEach(function(area){
+        var startX = scaleValue(area[0], upScale);
+        var startY = scaleValue(area[1], upScale);
+        var endX = scaleValue(area[2], upScale);
+        var endY = scaleValue(area[3], upScale);
+        var width = area[4];
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+    
+        ctx.strokeStyle = "gray";
+        ctx.lineWidth = 5;
+    
+        ctx.stroke();
+        ctx.closePath();
+    });
 }
 
 function exportJSON(){
