@@ -5,25 +5,44 @@ var robotY = document.getElementById("currentY");
 var lastLocation = [0, 0];
 const location_endpoint = 'http://10.12.34.2:3000/robot_location';
 
-function scaleValue(value, scale) {
-    return value / scale;
-}
-
 function fetchData() {
     fetch(location_endpoint)
         .then(response => response.json())
         .then(data => {
             ctx.fillStyle = "red";
             
-            ctx.clearRect(lastLocation[0] - 1, lastLocation[1] - 1, 12, 12);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillRect(scaleValue(data.X, upScale), scaleValue(data.Y, upScale), 10, 10);
-            console.log("X: " + data.X + "\nY: " + data.Y + "\nScaledX: " + scaleValue(data.X, upScale) + "\nScaledY: " + scaleValue(data.Y, upScale));
-            
             lastLocation = [scaleValue(data.X, upScale), scaleValue(data.Y, upScale)];
 
             robotX.innerHTML = parseInt(data.X);
             robotY.innerHTML = parseInt(data.Y);
+            
+            var centerX = scaleValue(data.X, upScale);
+            var centerY = scaleValue(data.Y, upScale);
+            var radius = 14;
+
+            var points = [];
+            for (var i = 0; i < 6; i++) {
+                var angle = (Math.PI / 3) * i;
+                var x = centerX + radius * Math.cos(angle);
+                var y = centerY + radius * Math.sin(angle);
+                points.push({ x: x, y: y });
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (var i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
+            redraw();
+            
         })
         .catch(error => {
             console.error("Error fetching data: ", error);

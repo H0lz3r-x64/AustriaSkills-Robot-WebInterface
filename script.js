@@ -14,6 +14,30 @@ function scaleValue(value, scale) {
     return value / scale;
 }
 
+function redraw(){
+    wallArray.forEach(function(wall) {
+        var startX = scaleValue(wall[0], upScale);
+        var startY = scaleValue(wall[1], upScale);
+        var endX = scaleValue(wall[2], upScale);
+        var endY = scaleValue(wall[3], upScale);
+        var width = wall[4];
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = width;
+
+        ctx.stroke();
+        ctx.closePath();
+    });
+
+    pointArray.forEach(function(point) {
+        drawPickupPoint(scaleValue(point[0], upScale), scaleValue(point[1], upScale), point[2])
+    });
+}
+
 function exportJSON(){
     let data = {
         goals: goalArray,
@@ -193,15 +217,7 @@ robotForm.addEventListener("submit", (e) => {
 
 });
 
-let pointForm = document.getElementById("pickupForm");
-
-pointForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let x = scaleValue(document.getElementById("pickupX").value, upScale);
-    let y = scaleValue(document.getElementById("pickupY").value, upScale);
-    let rotation = parseInt(document.getElementById("pickupRot").value);
-
+function drawPickupPoint(x, y, rotation){
     ctx.fillStyle = "green";
     ctx.fillRect(x, y, 8, 8);
 
@@ -241,7 +257,18 @@ pointForm.addEventListener("submit", (e) => {
     ctx.moveTo(arrowStartX, arrowStartY);
     ctx.lineTo(arrowheadX2, arrowheadY2);
     ctx.stroke();
+}
 
+let pointForm = document.getElementById("pickupForm");
+
+pointForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let x = scaleValue(document.getElementById("pickupX").value, upScale);
+    let y = scaleValue(document.getElementById("pickupY").value, upScale);
+    let rotation = parseInt(document.getElementById("pickupRot").value);
+
+    drawPickupPoint(x, y, rotation);
 
     pointArray.push([scaleValue(x, downScale), scaleValue(y, downScale), rotation]);
 });
