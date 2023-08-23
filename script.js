@@ -298,3 +298,17 @@ startButton.addEventListener('click', function(event){
         postGoal(goal[0], goal[1]);
     }
 });
+
+let stopButton = document.getElementById("bigfuckingredbutton");
+
+stopButton.addEventListener("click", function(event){
+    const url = "http://10.12.34.2:3000/stop";
+
+    fetch(url, {
+        method: "GET",
+    })
+    .then(response => response.json())
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
