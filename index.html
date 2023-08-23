@@ -2,13 +2,14 @@
     <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <title> KNAPP Austriaskills Robot GUI</title>
     </head>
-    <body>
+    <body style="font-family: Arial">
         <div id="container">
             <div id="input">
                 <div id="goal">
                     <form id="goalForm">
-                        <h1>Goal</h1>
+                        <h2>Goal</h2>
                         <label>
                             X
                         </label>
@@ -25,7 +26,7 @@
                     </form>
                 </div>
                 <form id="wallForm">
-                    <h1>Wall</h1>
+                    <h2>Wall</h2>
                     <label>
                         Start X
                     </label>
@@ -55,7 +56,7 @@
                     <button class="submitForm" type="submit">Create wall</button>
                 </form>
                 <form id="pickupForm">
-                    <h1>Point</h1>
+                    <h2>Point</h2>
                     <label>
                         X
                     </label>
@@ -74,7 +75,7 @@
                     <button class="submitForm" type="submit">Create point</button>
                 </form>
                 <form id="robotForm">
-                    <h1>Robot</h1>
+                    <h2>Robot</h2>
                     <label>
                         X
                     </label>
@@ -93,7 +94,7 @@
                     <button class="submitForm" type="submit">Set robot position</button>
                 </form>
                 <form id="qrCodeForm">
-                    <h1>QR code area</h1>
+                    <h2>QR code area</h2>
                     <label>
                         Start X
                     </label>
@@ -119,14 +120,14 @@
                 </form>
             </div>
             <div id="goalListDiv">
-                <h1>Goals:</h1>
-                <ul id="goalList"></ul>
+                <h2>Goals:</h2>
+                <ol id="goalList"></ol>
             </div>
         </div>
         <div id="canvasContainer">
             <canvas id="canvas" width="800" height="400"></canvas>
         </div>
-        <button id="exportButton" type="button">Export</button>
+        <button id="exportButton" type="button">Export</button> 
         
         <script src="Queue.js"></script>
         <script src="script.js"></script>

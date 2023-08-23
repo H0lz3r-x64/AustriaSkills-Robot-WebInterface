@@ -91,7 +91,7 @@ function createGoal(x, y){
     dot.className = 'dot';
 
     var textElement = document.createElement('span');
-    textElement.textContent = goalArray.length;
+    textElement.textContent = goalArray.length + 1;
     textElement.style.fontSize = "10px";
     textElement.style.color = "green";
 
