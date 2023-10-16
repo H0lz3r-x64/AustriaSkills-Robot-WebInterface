@@ -326,3 +326,27 @@ constantsForm.addEventListener("submit", (e) => {
         console.error("Error:", error);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+    let url = "http://10.12.34.2:3000/update_constants";
+
+    fetch(url, {
+        method: "GET",
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("KI").value = data.KI;
+        document.getElementById("KI_LEFT").value = data.KI_LEFT;
+        document.getElementById("KI_RIGHT").value = data.KI_RIGHT;
+        document.getElementById("KI_BACK").value = data.KI_BACK;
+    
+        document.getElementById("KP").value = data.KP;
+        document.getElementById("KP_RIGHT").value = data.KP_RIGHT;
+        document.getElementById("KP_LEFT").value = data.KP_LEFT;
+        document.getElementById("KP_BACK").value = data.KP_BACK;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
+});
