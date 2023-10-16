@@ -177,33 +177,6 @@ wallForm.addEventListener("submit", (e) => {
     wallArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale), width]);
 });
 
-let qrForm = document.getElementById("qrCodeForm");
-
-qrForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let startX = scaleValue(document.getElementById("qrstartX").value, upScale);
-    let startY = scaleValue(document.getElementById("qrstartY").value, upScale);
-    let endX = scaleValue(document.getElementById("qrendX").value, upScale);
-    let endY = scaleValue(document.getElementById("qrendY").value, upScale);
-
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
-
-    ctx.strokeStyle = "gray";
-    ctx.lineWidth = 5;
-
-    ctx.stroke();
-    ctx.closePath();
-
-    qrAreaArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale)]);
-
-    createGoal(startX, startY);
-
-    createGoal(endX, endY);
-});
-
 let robotForm = document.getElementById("robotForm");
 
 robotForm.addEventListener("submit", (e) => {
