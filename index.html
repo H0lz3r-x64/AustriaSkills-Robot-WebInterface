@@ -93,30 +93,49 @@
                     <br>
                     <button class="submitForm" type="submit">Set robot position</button>
                 </form>
-                <form id="qrCodeForm">
-                    <h2>QR code area</h2>
+                <form id="constantsForm">
+                    <h2>RPM constants</h2>
                     <label>
-                        Start X
+                        KI
                     </label>
-                    <input class="coordinateInput" id="qrstartX" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        Start Y
-                    </label>
-                    <input class="coordinateInput" id="qrstartY" type="number" placeholder="0" max="2000" required>
-                    <br>
+                    <input class="constantInput" id="KI" type="number" placeholder="0" max="4000" required>
                     <br>
                     <label>
-                        End X
+                        KI_RIGHT
                     </label>
-                    <input class="coordinateInput" id="qrendX" type="number" placeholder="0" max="4000" required>
+                    <input class="constantInput" id="KI_RIGHT" type="number" placeholder="0" max="4000" required>
                     <br>
                     <label>
-                        End Y
+                        KI_LEFT
                     </label>
-                    <input class="coordinateInput" id="qrendY" type="number" placeholder="0" max="2000" required>
+                    <input class="constantInput" id="KI_LEFT" type="number" placeholder="0" max="4000" required>
                     <br>
-                    <button class="submitForm" type="submit">Create QR Code Area</button>
+                    <label>
+                        KI_BACK
+                    </label>
+                    <input class="constantInput" id="KI_BACK" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        KP
+                    </label>
+                    <input class="constantInput" id="KP" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        KP_RIGHT
+                    </label>
+                    <input class="constantInput" id="KP_RIGHT" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        KP_LEFT
+                    </label>
+                    <input class="constantInput" id="KP_LEFT" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <label>
+                        KP_BACK
+                    </label>
+                    <input class="constantInput" id="KP_BACK" type="number" placeholder="0" max="4000" required>
+                    <br>
+                    <button class="submitForm" type="submit">Update constants</button>
                 </form>
             </div>
             <div id="goalListDiv">

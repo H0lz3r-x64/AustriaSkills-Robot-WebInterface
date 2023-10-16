@@ -312,3 +312,44 @@ stopButton.addEventListener("click", function(event){
         console.error("Error:", error);
     });
 });
+
+let constantsForm = document.getElementById("constantsForm")
+
+constantsForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const url = "http://10.12.34.2:3000/update_constants";
+
+    let ki = document.getElementById("KI").value;
+    let ki_left = document.getElementById("KI_LEFT").value;
+    let ki_right = document.getElementById("KI_RIGHT").value;
+    let ki_back = document.getElementById("KI_BACK").value;
+
+    let kp = document.getElementById("KP").value;
+    let kp_left = document.getElementById("KP_RIGHT").value;
+    let kp_right = document.getElementById("KP_LEFT").value;
+    let kp_back = document.getElementById("KP_BACK").value;
+
+    const data = {
+        KI: ki,
+        KI_RIGHT: ki_right,
+        KI_LEFT: ki_left,
+        KI_BACK: ki_back,
+        KP: kp,
+        KP_RIGHT: kp_right,
+        KP_LEFT: kp_left,
+        KP_BACK: kp_back
+    }
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .catch(error => {
+        console.error("Error:", error);
+    });
+});
