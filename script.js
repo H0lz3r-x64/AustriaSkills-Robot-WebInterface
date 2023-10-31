@@ -147,36 +147,6 @@ goalForm.addEventListener("submit", (e) => {
     createGoal(scaleValue(x, upScale), scaleValue(y, upScale));
 });
 
-let exportButton = document.getElementById('exportButton');
-
-exportButton.addEventListener('click', function() {
-    exportJSON();
-});
-
-let wallForm = document.getElementById("wallForm");
-
-wallForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let startX = scaleValue(document.getElementById("startX").value, upScale);
-    let startY = scaleValue(document.getElementById("startY").value, upScale);
-    let endX = scaleValue(document.getElementById("endX").value, upScale);
-    let endY = scaleValue(document.getElementById("endY").value, upScale);
-    let width = parseInt(document.getElementById("wallWidth").value);
-
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
-
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = width;
-
-    ctx.stroke();
-    ctx.closePath();
-
-    wallArray.push([scaleValue(startX, downScale), scaleValue(startY, downScale), scaleValue(endX, downScale), scaleValue(endY, downScale), width]);
-});
-
 let robotForm = document.getElementById("robotForm");
 
 robotForm.addEventListener("submit", (e) => {
@@ -206,62 +176,6 @@ robotForm.addEventListener("submit", (e) => {
 
 });
 
-function drawPickupPoint(x, y, rotation){
-    ctx.fillStyle = "green";
-    ctx.fillRect(x, y, 8, 8);
-
-    let centerX = x + 4;
-    let centerY = y + 4;
-
-    let distanceFromRect = 5;
-    let offsetX = distanceFromRect * Math.cos(rotation * Math.PI / 180);
-    let offsetY = distanceFromRect * Math.sin(rotation * Math.PI / 180);
-
-    let arrowStartX = centerX - offsetX;
-    let arrowStartY = centerY - offsetY;
-
-    let arrowLength = 20;
-    let endX = arrowStartX - arrowLength * Math.cos(rotation * Math.PI / 180);
-    let endY = arrowStartY - arrowLength * Math.sin(rotation * Math.PI / 180);
-
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(arrowStartX, arrowStartY);
-    ctx.lineTo(endX, endY);
-    ctx.stroke();
-
-    let arrowheadLength = 10;
-    let angle1 = (rotation - 30) * Math.PI / 180;
-    let angle2 = (rotation + 30) * Math.PI / 180;
-
-    let arrowheadX1 = arrowStartX - arrowheadLength * Math.cos(angle1);
-    let arrowheadY1 = arrowStartY - arrowheadLength * Math.sin(angle1);
-    let arrowheadX2 = arrowStartX - arrowheadLength * Math.cos(angle2);
-    let arrowheadY2 = arrowStartY - arrowheadLength * Math.sin(angle2);
-
-    ctx.beginPath();
-    ctx.moveTo(arrowStartX, arrowStartY);
-    ctx.lineTo(arrowheadX1, arrowheadY1);
-    ctx.moveTo(arrowStartX, arrowStartY);
-    ctx.lineTo(arrowheadX2, arrowheadY2);
-    ctx.stroke();
-}
-
-let pointForm = document.getElementById("pickupForm");
-
-pointForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    let x = scaleValue(document.getElementById("pickupX").value, upScale);
-    let y = scaleValue(document.getElementById("pickupY").value, upScale);
-    let rotation = parseInt(document.getElementById("pickupRot").value);
-
-    drawPickupPoint(x, y, rotation);
-
-    pointArray.push([scaleValue(x, downScale), scaleValue(y, downScale), rotation]);
-});
-
 let startButton = document.getElementById("startButton");
 
 startButton.addEventListener('click', function(event){
@@ -284,69 +198,4 @@ stopButton.addEventListener("click", function(event){
     .catch(error => {
         console.error("Error:", error);
     });
-});
-
-let constantsForm = document.getElementById("constantsForm")
-
-constantsForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const url = "http://10.12.34.2:3000/update_constants";
-
-    let ki = document.getElementById("KI").value;
-    let ki_left = document.getElementById("KI_LEFT").value;
-    let ki_right = document.getElementById("KI_RIGHT").value;
-    let ki_back = document.getElementById("KI_BACK").value;
-
-    let kp = document.getElementById("KP").value;
-    let kp_left = document.getElementById("KP_RIGHT").value;
-    let kp_right = document.getElementById("KP_LEFT").value;
-    let kp_back = document.getElementById("KP_BACK").value;
-
-    const data = {
-        KI: ki,
-        KI_RIGHT: ki_right,
-        KI_LEFT: ki_left,
-        KI_BACK: ki_back,
-        KP: kp,
-        KP_RIGHT: kp_right,
-        KP_LEFT: kp_left,
-        KP_BACK: kp_back
-    }
-
-    fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .catch(error => {
-        console.error("Error:", error);
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function(){
-    let url = "http://10.12.34.2:3000/update_constants";
-
-    fetch(url, {
-        method: "GET",
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("KI").value = data.KI;
-        document.getElementById("KI_LEFT").value = data.KI_LEFT;
-        document.getElementById("KI_RIGHT").value = data.KI_RIGHT;
-        document.getElementById("KI_BACK").value = data.KI_BACK;
-    
-        document.getElementById("KP").value = data.KP;
-        document.getElementById("KP_RIGHT").value = data.KP_RIGHT;
-        document.getElementById("KP_LEFT").value = data.KP_LEFT;
-        document.getElementById("KP_BACK").value = data.KP_BACK;
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-
 });

@@ -25,55 +25,6 @@
                         <button id="startButton" class="submitForm" type="button">Start</button>
                     </form>
                 </div>
-                <form id="wallForm">
-                    <h2>Wall</h2>
-                    <label>
-                        Start X
-                    </label>
-                    <input class="coordinateInput" id="startX" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        Start Y
-                    </label>
-                    <input class="coordinateInput" id="startY" type="number" placeholder="0" max="2000" required>
-                    <br>
-                    <br>
-                    <label>
-                        End X
-                    </label>
-                    <input class="coordinateInput" id="endX" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        End Y
-                    </label>
-                    <input class="coordinateInput" id="endY" type="number" placeholder="0" max="2000" required>
-                    <br>
-                    <label>
-                        Width
-                    </label>
-                    <input class="coordinateInput" id="wallWidth" type="number" placeholder="1" required>
-                    <br>
-                    <button class="submitForm" type="submit">Create wall</button>
-                </form>
-                <form id="pickupForm">
-                    <h2>Point</h2>
-                    <label>
-                        X
-                    </label>
-                    <input class="coordinateInput" id="pickupX" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        Y
-                    </label>
-                    <input class="coordinateInput" id="pickupY" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        Rotation
-                    </label>
-                    <input class="coordinateInput" id="pickupRot" type="number" placeholder="0" max="360" required>
-                    <br>
-                    <button class="submitForm" type="submit">Create point</button>
-                </form>
                 <form id="robotForm">
                     <h2>Robot</h2>
                     <label>
@@ -93,50 +44,6 @@
                     <br>
                     <button class="submitForm" type="submit">Set robot position</button>
                 </form>
-                <form id="constantsForm">
-                    <h2>RPM constants</h2>
-                    <label>
-                        KI
-                    </label>
-                    <input class="constantInput" id="KI" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KI_RIGHT
-                    </label>
-                    <input class="constantInput" id="KI_RIGHT" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KI_LEFT
-                    </label>
-                    <input class="constantInput" id="KI_LEFT" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KI_BACK
-                    </label>
-                    <input class="constantInput" id="KI_BACK" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KP
-                    </label>
-                    <input class="constantInput" id="KP" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KP_RIGHT
-                    </label>
-                    <input class="constantInput" id="KP_RIGHT" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KP_LEFT
-                    </label>
-                    <input class="constantInput" id="KP_LEFT" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        KP_BACK
-                    </label>
-                    <input class="constantInput" id="KP_BACK" type="number" step="0.01" placeholder="0" max="4000" required>
-                    <br>
-                    <button class="submitForm" type="submit">Update constants</button>
-                </form>
             </div>
             <div id="goalListDiv">
                 <h2>Goals:</h2>
@@ -146,7 +53,6 @@
         <div id="canvasContainer">
             <canvas id="canvas" width="800" height="400"></canvas>
         </div>
-        <button id="exportButton" type="button">Export</button> 
         <button id="bigfuckingredbutton" type="button">STOP</button>
 
         <script src="Queue.js"></script>
