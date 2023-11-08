@@ -1,66 +1,96 @@
-#canvasContainer {
-    position: relative;
-    height: 400px;
-    width: 800px;
-    border: 1px solid black;
-    margin-top: 50px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.dot {
-    position: absolute;
-    height: 5px;
-    width: 5px;
-    background-color: black;
-    border-radius: 50%;
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.input {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.goal, #robotForm {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.goal h2, #robotForm h2 {
+    font-size: 20px;
+}
+
+.goalList {
+    flex: 1;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+canvas {
+    width: 100%;
+    border: 1px solid #333;
+}
+
+.canvasContainer{
+    margin-top: 50px;
 }
 
 .submitForm {
     margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.coordinateInput{
+.coordinateInput {
     width: 60px;
     text-align: center;
 }
 
-
-#container {
-    display: flex;
-    justify-content: space-between;
+#stopButton {
+    background-color: red;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-#goalListDiv{
-    margin-left: 350px;
-    position: absolute;
-}
-
-#exportButton{
+.omsStatus {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     margin-top: 20px;
 }
 
-#input{
-    display: flex;
-}
-
-#robotForm{
-    margin-left: 100px;
-}
-
-#bigfuckingredbutton{
-    width: 50px;
-    height: 50px;
-    margin-top: 50px;
-    color: red;
-}
-
-#console{
-    margin-left: 1000px;
-    position: absolute;
-}
-
-#console_text{
-    border: 1px solid black;
-    width: 700px;
-    height: 300px;
-    overflow: scroll;
+.omsStatus h2 {
+    font-size: 20px;
 }

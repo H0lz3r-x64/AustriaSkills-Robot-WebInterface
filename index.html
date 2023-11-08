@@ -1,62 +1,42 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <title> KNAPP Austriaskills Robot GUI</title>
-    </head>
-    <body style="font-family: Arial">
-        <div id="container">
-            <div id="input">
-                <div id="goal">
-                    <form id="goalForm">
-                        <h2>Goal</h2>
-                        <label>
-                            X
-                        </label>
-                        <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
-                        <br>
-                        <label>
-                            Y
-                        </label>
-                        <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
-                        <br>
-                        <button class="submitForm" type="submit">Create goal</button>
-                        <br>
-                        <button id="startButton" class="submitForm" type="button">Start</button>
-                    </form>
-                </div>
-                <form id="robotForm">
-                    <h2>Robot</h2>
-                    <label>
-                        X
-                    </label>
-                    <input class="coordinateInput" id="robotX" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <label>
-                        Y
-                    </label>
-                    <input class="coordinateInput" id="robotY" type="number" placeholder="0" max="4000" required>
-                    <br>
-                    <h3>Current X</h3>
-                    <label id="currentX"></label>
-                    <h3>Current Y</h3>
-                    <label id="currentY"></label>
-                    <br>
-                    <button class="submitForm" type="submit">Set robot position</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>KNAPP Austriaskills Robot GUI</title>
+</head>
+<body>
+    <header>
+        <h1>Robot Control</h1>
+    </header>
+    <div class="container">
+        <section class="input">
+            <div class="goal">
+                <form id="goalForm">
+                    <h2>Set Goal</h2>
+                    <label for="goalX">X</label>
+                    <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
+                    <label for="goalY">Y</label>
+                    <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
+                    <button class="submitForm" type="submit">Create Goal</button>
+                    <button id="startButton" class="submitForm" type="button">Start</button>
                 </form>
             </div>
-            <div id="goalListDiv">
-                <h2>Goals:</h2>
-                <ol id="goalList"></ol>
-            </div>
-        </div>
-        <div id="canvasContainer">
+            <form id="robotForm">
+                <h2>Robot Position</h2>
+                <label for="robotX">X</label>
+                <input class="coordinateInput" id="robotX" type="number" placeholder="0" max="4000" required>
+                <label for="robotY">Y</label>
+                <input class="coordinateInput" id="robotY" type="number" placeholder="0" max="4000" required>
+                <button class="submitForm" type="submit">Set Robot Position</button>
+            </form>
+        </section>
+        <section class="omsStatus">
+            <h2>OMS Status</h2>
+        </section>
+        <div class="canvasContainer">
+            <button id="stopButton" type="button">STOP</button>
             <canvas id="canvas" width="800" height="400"></canvas>
         </div>
-        <button id="bigfuckingredbutton" type="button">STOP</button>
-
-        <script src="Queue.js"></script>
-        <script src="script.js"></script>
-        <script src="robot_comms.js"></script>
-    </body>
-    </html>
+    </div>
+</body>
+</html>
