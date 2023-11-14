@@ -1,4 +1,4 @@
-var canvasContainer = document.getElementById('canvasContainer');
+var canvasContainer = document.getElementById("canvasContainer");
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
@@ -15,8 +15,8 @@ function scaleValue(value, scale) {
     return value / scale;
 }
 
-function redraw(){
-    wallArray.forEach(function(wall) {
+function redraw() {
+    wallArray.forEach(function (wall) {
         var startX = scaleValue(wall[0], upScale);
         var startY = scaleValue(wall[1], upScale);
         var endX = scaleValue(wall[2], upScale);
@@ -34,11 +34,15 @@ function redraw(){
         ctx.closePath();
     });
 
-    pointArray.forEach(function(point) {
-        drawPickupPoint(scaleValue(point[0], upScale), scaleValue(point[1], upScale), point[2])
+    pointArray.forEach(function (point) {
+        drawPickupPoint(
+            scaleValue(point[0], upScale),
+            scaleValue(point[1], upScale),
+            point[2]
+        );
     });
 
-    qrAreaArray.forEach(function(area){
+    qrAreaArray.forEach(function (area) {
         var startX = scaleValue(area[0], upScale);
         var startY = scaleValue(area[1], upScale);
         var endX = scaleValue(area[2], upScale);
@@ -48,49 +52,51 @@ function redraw(){
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         ctx.lineTo(endX, endY);
-    
+
         ctx.strokeStyle = "gray";
         ctx.lineWidth = 5;
-    
+
         ctx.stroke();
         ctx.closePath();
     });
 }
 
-function exportJSON(){
+function exportJSON() {
     let data = {
         goals: goalArray,
         walls: wallArray,
-        pickups: pointArray
-    }
+        pickups: pointArray,
+    };
 
     let jsonStr = JSON.stringify(data, null, 2);
     let jsonBlob = new Blob([jsonStr], { type: "application/json" });
-    let downloadLink = document.createElement('a');
+    let downloadLink = document.createElement("a");
 
     downloadLink.href = URL.createObjectURL(jsonBlob);
-    downloadLink.download = 'data.json';
+    downloadLink.download = "data.json";
 
     downloadLink.click();
 }
 
-function addDotToList(x, y){
+function addDotToList(x, y) {
     var list = document.getElementById("goalList");
 
     var item = document.createElement("li");
-    item.appendChild(document.createTextNode("X: " + Math.round(x) + " Y: " + Math.round(y)));
+    item.appendChild(
+        document.createTextNode("X: " + Math.round(x) + " Y: " + Math.round(y))
+    );
 
     list.appendChild(item);
 }
 
-function createGoal(x, y){
-    var dot = document.createElement('div');
-    dot.style.left = `${x-2.5}px`;
-    dot.style.top = `${y-2.5}px`;
+function createGoal(x, y) {
+    var dot = document.createElement("div");
+    dot.style.left = `${x - 2.5}px`;
+    dot.style.top = `${y - 2.5}px`;
 
-    dot.className = 'dot';
+    dot.className = "dot";
 
-    var textElement = document.createElement('span');
+    var textElement = document.createElement("span");
     textElement.textContent = goalArray.length + 1;
     textElement.style.fontSize = "10px";
     textElement.style.color = "green";
@@ -108,35 +114,34 @@ function createGoal(x, y){
     goalsToPost.enqueue([x, y]);
 }
 
-function postGoal(x, y){
+function postGoal(x, y) {
     const url = "http://10.12.34.2:3000/add_goal";
     const data = {
         X: x,
-        Y: y
+        Y: y,
     };
 
     fetch(url, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
-    
+        body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 }
 
-canvasContainer.addEventListener('click', function(event) {
+canvasContainer.addEventListener("click", function (event) {
     var x = event.clientX - canvasContainer.getBoundingClientRect().left;
     var y = event.clientY - canvasContainer.getBoundingClientRect().top;
 
     createGoal(x, y);
 });
 
-let goalForm = document.getElementById("goalForm")
+let goalForm = document.getElementById("goalForm");
 
 goalForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -158,28 +163,26 @@ robotForm.addEventListener("submit", (e) => {
     const url = "http://10.12.34.2:3000/robot_location";
     const data = {
         X: x,
-        Y: y
+        Y: y,
     };
 
     fetch(url, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
-    
+        body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .catch(error => {
-        console.error("Error:", error);
-    });
-
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 });
 
-let startButton = document.getElementById("startButton");
+let playBtn = document.getElementById("play-btn");
 
-startButton.addEventListener('click', function(event){
-    while(!goalsToPost.isEmpty){
+startButton.addEventListener("click", function (event) {
+    while (!goalsToPost.isEmpty) {
         var goal = goalsToPost.dequeue();
 
         postGoal(goal[0], goal[1]);
@@ -188,14 +191,14 @@ startButton.addEventListener('click', function(event){
 
 let stopButton = document.getElementById("bigfuckingredbutton");
 
-stopButton.addEventListener("click", function(event){
+stopButton.addEventListener("click", function (event) {
     const url = "http://10.12.34.2:3000/stop";
 
     fetch(url, {
         method: "GET",
     })
-    .then(response => response.json())
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 });
