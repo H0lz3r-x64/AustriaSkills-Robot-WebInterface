@@ -3,6 +3,15 @@ var ctx = canvas.getContext("2d");
 var xPos = document.getElementById("xPos");
 var yPos = document.getElementById("yPos");
 var rot = document.getElementById("rot");
+var elevatorPosition = document.getElementById("elevatorPosition");
+var carriagePosition = document.getElementById("carriagePosition");
+var gripperStatus = document.getElementById("gripperStatus");
+var IRSensorLeft = document.getElementById("IRSensorLeft");
+var IRSensorRight = document.getElementById("IRSensorRight");
+var USSensorLeft = document.getElementById("USSensorLeft");
+var USSensorRight = document.getElementById("USSensorRight");
+var lineFollowerSensor = document.getElementById("lineFollowerSensor");
+
 var lastLocation = [0, 0];
 const location_endpoint = "http://10.12.34.2:3000/robot_location";
 
@@ -22,6 +31,16 @@ function fetchData() {
             xPos.innerHTML = parseInt(data.X) + " mm";
             yPos.innerHTML = parseInt(data.Y) + " mm";
             rot.innerHTML = parseFloat(data.ROT) + " rad";
+            elevatorPosition.innerHTML =
+                parseFloat(data.elevatorPosition) + " mm";
+            carriagePosition.innerHTML =
+                parseFloat(data.carriagePosition) + "/100 %";
+            gripperStatus.innerHTML = parseFloat(data.gripperStatus);
+            IRSensorLeft.innerHTML = parseInt(data.IRSensorLeft) + " mm";
+            IRSensorRight.innerHTML = parseInt(data.IRSensorRight) + " mm";
+            USSensorLeft.innerHTML = parseInt(data.USSensorLeft) + " mm";
+            USSensorRight.innerHTML = parseInt(data.USSensorRight) + " mm";
+            lineFollowerSensor.innerHTML = parseInt(data.lineFollowerSensor);
 
             var centerX = scaleValue(data.X, upScale);
             var centerY = scaleValue(data.Y, upScale);
