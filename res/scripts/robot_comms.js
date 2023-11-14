@@ -1,23 +1,26 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var robotX = document.getElementById("currentX");
-var robotY = document.getElementById("currentY");
+var xPos = document.getElementById("xPos");
+var yPos = document.getElementById("yPos");
 var lastLocation = [0, 0];
-const location_endpoint = 'http://10.12.34.2:3000/robot_location';
+const location_endpoint = "http://10.12.34.2:3000/robot_location";
 
 function fetchData() {
     fetch(location_endpoint)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
             ctx.fillStyle = "red";
-            
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            lastLocation = [scaleValue(data.X, upScale), scaleValue(data.Y, upScale)];
+            lastLocation = [
+                scaleValue(data.X, upScale),
+                scaleValue(data.Y, upScale),
+            ];
 
-            robotX.innerHTML = parseInt(data.X);
-            robotY.innerHTML = parseInt(data.Y);
-            
+            xPos.innerHTML = parseInt(data.X);
+            yPos.innerHTML = parseInt(data.Y);
+
             var centerX = scaleValue(data.X, upScale);
             var centerY = scaleValue(data.Y, upScale);
             var radius = 14;
@@ -42,9 +45,8 @@ function fetchData() {
 
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
             redraw();
-            
         })
-        .catch(error => {
+        .catch((error) => {
             console.error("Error fetching data: ", error);
         });
 }

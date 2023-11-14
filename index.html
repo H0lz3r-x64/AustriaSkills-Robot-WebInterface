@@ -2,11 +2,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Austria Skills - KNAPP Robot Interface</title>
 
         <link rel="stylesheet" href="./res/styles/globals.css" />
         <link rel="stylesheet" href="./res/styles/style.css" />
-
-        <title>Austria Skills - KNAPP Robot Interface</title>
     </head>
     <body>
         <div class="site">
@@ -24,7 +23,6 @@
                         <label
                             ><input
                                 type="checkbox"
-                                value="0"
                                 id="playstop-button" /><span></span
                         ></label>
                     </div>
@@ -39,7 +37,7 @@
 
             <div class="content">
                 <div class="display-area">
-                    <div class="rectangle"></div>
+                    <canvas id="canvas" class="rectangle"></canvas>
                 </div>
                 <div class="side-bar">
                     <div class="sidebar-items">
@@ -50,7 +48,7 @@
 
                             <tr>
                                 <td>X-Position</td>
-                                <td></td>
+                                <td id="xPos"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -64,7 +62,7 @@
                             </tr>
                             <tr>
                                 <td>Y-Position</td>
-                                <td></td>
+                                <td id="yPos"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -78,7 +76,7 @@
                             </tr>
                             <tr>
                                 <td>Rotation</td>
-                                <td></td>
+                                <td id="rot"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -97,7 +95,7 @@
                             </tr>
                             <tr>
                                 <td>Elevator-Position</td>
-                                <td></td>
+                                <td id="elevatorPosition"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -111,7 +109,7 @@
                             </tr>
                             <tr>
                                 <td>Carriage-Position</td>
-                                <td></td>
+                                <td id="carriagePosition"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -125,7 +123,7 @@
                             </tr>
                             <tr>
                                 <td>Gripper-Status</td>
-                                <td></td>
+                                <td id="gripperStatus"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -144,7 +142,7 @@
                             </tr>
                             <tr>
                                 <td>IR-Sensor(Left)</td>
-                                <td></td>
+                                <td id="IRSensorLeft"></td>
                                 <td rowspan="4">
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -158,21 +156,21 @@
                             </tr>
                             <tr>
                                 <td>IR-Sensor(Right)</td>
-                                <td></td>
+                                <td id="IRSensorRight"></td>
                             </tr>
 
                             <tr>
                                 <td>US-Sensor(Left)</td>
-                                <td></td>
+                                <td id="USSensorLeft"></td>
                             </tr>
 
                             <tr>
                                 <td>US-Sensor(Right)</td>
-                                <td></td>
+                                <td id="USSensorRight"></td>
                             </tr>
                             <tr>
                                 <td>Line Follower Sensor</td>
-                                <td></td>
+                                <td id="lineFollowerSensor"></td>
                                 <td>
                                     <div class="checkbox-show shine-effect">
                                         <label
@@ -194,4 +192,7 @@
             src="./res/images/KNAPP_Netzwerk_V1.png"
         />
     </body>
+    <script src="./res/scripts/Queue.js"></script>
+    <script src="./res/scripts/script.js"></script>
+    <script src="./res/scripts/robot_comms.js"></script>
 </html>
