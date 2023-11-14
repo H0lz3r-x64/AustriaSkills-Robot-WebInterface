@@ -146,14 +146,16 @@ td:nth-child(3) {
     border-bottom: 8px solid #029aa9;
     background-color: #2b383f;
 }
-.round-action-btn {
+
+.playstop-button,
+.round-action-button {
     width: 42px;
     height: 42px;
     overflow: hidden;
     border-radius: 7px;
 }
 
-.round-action-btn label span {
+.playstop-button label span {
     width: 100%;
     height: 100%;
 
@@ -165,12 +167,12 @@ td:nth-child(3) {
     background-repeat: no-repeat;
 }
 
-.round-action-btn label input {
+.playstop-button label input {
     position: absolute;
     display: none;
 }
 
-.round-action-btn input:checked + span {
+.playstop-button input:checked + span {
     background-image: url("../images/stop-fill.svg");
     background-size: 42px;
 }
