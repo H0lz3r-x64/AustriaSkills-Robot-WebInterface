@@ -2,6 +2,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var xPos = document.getElementById("xPos");
 var yPos = document.getElementById("yPos");
+var rot = document.getElementById("rot");
 var lastLocation = [0, 0];
 const location_endpoint = "http://10.12.34.2:3000/robot_location";
 
@@ -20,6 +21,7 @@ function fetchData() {
 
             xPos.innerHTML = parseInt(data.X);
             yPos.innerHTML = parseInt(data.Y);
+            rot.innerHTML = parseFloat(data.ROT);
 
             var centerX = scaleValue(data.X, upScale);
             var centerY = scaleValue(data.Y, upScale);
