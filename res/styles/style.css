@@ -175,14 +175,6 @@ td:nth-child(3) {
     background-size: 42px;
 }
 
-.round-action-btn:hover {
-    background-color: #4c5052;
-}
-
-.round-action-btn:active {
-    background-color: #4c5052;
-}
-
 .battery-display {
     width: 40px;
     height: 40px;

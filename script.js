@@ -181,7 +181,8 @@ robotForm.addEventListener("submit", (e) => {
 
 let playBtn = document.getElementById("play-btn");
 
-startButton.addEventListener("click", function (event) {
+playBtn.addEventListener("click", function (event) {
+    playBtn.
     while (!goalsToPost.isEmpty) {
         var goal = goalsToPost.dequeue();
 
