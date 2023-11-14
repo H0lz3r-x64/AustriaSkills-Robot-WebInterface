@@ -19,9 +19,9 @@ function fetchData() {
                 scaleValue(data.Y, upScale),
             ];
 
-            xPos.innerHTML = parseInt(data.X);
-            yPos.innerHTML = parseInt(data.Y);
-            rot.innerHTML = parseFloat(data.ROT);
+            xPos.innerHTML = parseInt(data.X) + " mm";
+            yPos.innerHTML = parseInt(data.Y) + " mm";
+            rot.innerHTML = parseFloat(data.ROT) + " rad";
 
             var centerX = scaleValue(data.X, upScale);
             var centerY = scaleValue(data.Y, upScale);
