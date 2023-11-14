@@ -179,10 +179,11 @@ robotForm.addEventListener("submit", (e) => {
         });
 });
 
-let playBtn = document.getElementById("play-btn");
+let playStopBtn = document.getElementById("playstop-button");
 
-playBtn.addEventListener("click", function (event) {
-    playBtn.
+playStopBtn.addEventListener("click", function (event) {
+    console.log("sda");
+    console.log(event.target.value);
     while (!goalsToPost.isEmpty) {
         var goal = goalsToPost.dequeue();
 
