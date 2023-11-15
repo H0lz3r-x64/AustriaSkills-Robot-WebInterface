@@ -134,6 +134,17 @@ td:nth-child(3) {
     padding: 2px;
 }
 
+.error-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #00000015;
+    backdrop-filter: blur(4px);
+}
+
 .title-bar {
     position: fixed;
     z-index: 1;
