@@ -15,9 +15,22 @@ var lineFollowerSensor = document.getElementById("lineFollowerSensor");
 var lastLocation = [0, 0];
 const location_endpoint = "http://10.12.34.2:3000/robot_status";
 
+const handleErrors = (response) => {
+    if (!response.ok) {
+        throw Error(`HTTP error! Status: ${response.statusText}`);
+    }
+    return response.blob();
+};
+
 function fetchData() {
     fetch(location_endpoint)
+        // Error handling
+        .then(handleErrors)
+        .then((response) => console.log("ok"))
+        .catch((error) => console.log(error))
+        // pass the response to json
         .then((response) => response.json())
+        // map our data
         .then((data) => {
             ctx.fillStyle = "red";
 
