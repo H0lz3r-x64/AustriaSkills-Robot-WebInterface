@@ -27,19 +27,18 @@ function fetchData() {
                 scaleValue(data.X, upScale),
                 scaleValue(data.Y, upScale),
             ];
-            
+
             xPos.innerHTML = parseInt(data.xPos) + " mm";
             yPos.innerHTML = parseInt(data.yPos) + " mm";
             rot.innerHTML = parseFloat(data.rot) + " deg";
-            elevatorPosition.innerHTML =
-                data.elevatorPosition;
+            elevatorPosition.innerHTML = data.elevatorPosition;
             carriagePosition.innerHTML =
                 parseFloat(data.carriagePosition) + "/100 %";
             gripperStatus.innerHTML = data.gripperStatus;
-            IRSensorLeft.innerHTML = parseInt(data.IRSensorLeft);
-            IRSensorRight.innerHTML = parseInt(data.IRSensorRight);
-            USSensorLeft.innerHTML = parseInt(data.USSensorLeft) + " mm";
-            USSensorRight.innerHTML = parseInt(data.USSensorRight) + " mm";
+            IRSensorLeft.innerHTML = parseFloat(data.IRSensorLeft);
+            IRSensorRight.innerHTML = parseFloat(data.IRSensorRight);
+            USSensorLeft.innerHTML = parseFloat(data.USSensorLeft) + " mm";
+            USSensorRight.innerHTML = parseFloat(data.USSensorRight) + " mm";
             lineFollowerSensor.innerHTML = data.lineFollowerSensor;
 
             var centerX = scaleValue(data.X, upScale);
