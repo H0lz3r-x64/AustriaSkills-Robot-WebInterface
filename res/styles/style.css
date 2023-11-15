@@ -145,7 +145,8 @@ td:nth-child(3) {
     justify-content: space-between;
     align-items: center;
     border-bottom: 8px solid #029aa9;
-    background-color: #2b383f;
+    background-color: #00000027;
+    backdrop-filter: blur(10px);
 }
 
 .playstop-button,
@@ -164,7 +165,10 @@ td:nth-child(3) {
 
     background-position: center;
     background-size: 42px;
-    background-image: url("../images/play-btn.svg");
+    /* Play icon not in use since the robot will solely be started via the ControlStation  */
+    /* background-image: url("../images/play-btn.svg"); */
+    /* ...thus using the stop button once again */
+    background-image: url("../images/stop-fill.svg");
     background-repeat: no-repeat;
 }
 
