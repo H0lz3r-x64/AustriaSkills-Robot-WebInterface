@@ -13,7 +13,7 @@ var USSensorRight = document.getElementById("USSensorRight");
 var lineFollowerSensor = document.getElementById("lineFollowerSensor");
 
 var lastLocation = [0, 0];
-const location_endpoint = "http://10.12.34.2:3000/robot_location";
+const location_endpoint = "http://10.12.34.2:3000/robot_status";
 
 function fetchData() {
     fetch(location_endpoint)
@@ -27,20 +27,20 @@ function fetchData() {
                 scaleValue(data.X, upScale),
                 scaleValue(data.Y, upScale),
             ];
-
+            
             xPos.innerHTML = parseInt(data.X) + " mm";
             yPos.innerHTML = parseInt(data.Y) + " mm";
-            rot.innerHTML = parseFloat(data.ROT) + " rad";
+            rot.innerHTML = parseFloat(data.ROT) + " deg";
             elevatorPosition.innerHTML =
-                parseFloat(data.elevatorPosition) + " mm";
+                toString(data.elevatorPosition);
             carriagePosition.innerHTML =
                 parseFloat(data.carriagePosition) + "/100 %";
-            gripperStatus.innerHTML = parseFloat(data.gripperStatus);
-            IRSensorLeft.innerHTML = parseInt(data.IRSensorLeft) + " mm";
-            IRSensorRight.innerHTML = parseInt(data.IRSensorRight) + " mm";
+            gripperStatus.innerHTML = toString(data.gripperStatus);
+            IRSensorLeft.innerHTML = parseInt(data.IRSensorLeft);
+            IRSensorRight.innerHTML = parseInt(data.IRSensorRight);
             USSensorLeft.innerHTML = parseInt(data.USSensorLeft) + " mm";
             USSensorRight.innerHTML = parseInt(data.USSensorRight) + " mm";
-            lineFollowerSensor.innerHTML = parseInt(data.lineFollowerSensor);
+            lineFollowerSensor.innerHTML = toString(data.lineFollowerSensor);
 
             var centerX = scaleValue(data.X, upScale);
             var centerY = scaleValue(data.Y, upScale);
