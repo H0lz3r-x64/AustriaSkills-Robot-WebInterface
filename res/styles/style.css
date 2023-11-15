@@ -99,6 +99,7 @@ th {
 }
 
 table {
+    border-spacing: 0;
     background-color: #001119;
     margin: 20px;
     margin-top: 0px;
