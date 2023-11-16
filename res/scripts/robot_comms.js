@@ -1,5 +1,5 @@
 var retriesLeft = 3;
-var errorOverlay = document.getElementById("error-overlay");
+var errorOverlay = document.getElementById("errorOverlay");
 var errorReport = document.getElementById("errorReport");
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -16,6 +16,8 @@ var USSensorRight = document.getElementById("USSensorRight");
 var lineFollowerSensor = document.getElementById("lineFollowerSensor");
 
 var lastLocation = [0, 0];
+// us this one for localhost debugging
+// const location_endpoint = "http://127.0.0.1:5000/robot_status";
 const location_endpoint = "http://10.12.34.2:3000/robot_status";
 
 const handleErrors = (response) => {
@@ -27,7 +29,7 @@ const handleErrors = (response) => {
 };
 
 const fetchFailed = (error) => {
-    errorOverlay.style.display = "block";
+    errorOverlay.style.display = "flex";
     if (retriesLeft > 0) {
         errorReport.textContent = "Retrying" + ".".repeat(4 - retriesLeft);
         console.log(
@@ -40,6 +42,7 @@ const fetchFailed = (error) => {
     errorReport.textContent =
         "After resolving the problem, please reload the page";
     clearInterval(intervalID);
+    throw Error(error);
 };
 
 function fetchData() {
@@ -47,7 +50,6 @@ function fetchData() {
         // Error handling
         .then(handleErrors)
         // pass the response to json
-        .then((response) => response.json())
         // map our data
         .then((data) => {
             ctx.fillStyle = "red";
@@ -96,7 +98,7 @@ function fetchData() {
 
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
             redraw();
-            errorOverlay.style.display = "block";
+            errorOverlay.style.display = "none";
         })
         .catch((error) => fetchFailed(error));
 }
