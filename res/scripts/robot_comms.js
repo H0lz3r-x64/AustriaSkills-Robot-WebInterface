@@ -22,6 +22,7 @@ const handleErrors = (response) => {
     if (!response.ok) {
         throw Error(`HTTP error! Status: ${response.statusText}`);
     }
+    console.log("response ok");
     return response.blob();
 };
 
@@ -45,8 +46,6 @@ function fetchData() {
     fetch(location_endpoint)
         // Error handling
         .then(handleErrors)
-        .then((response) => console.log("ok"))
-        .catch((error) => fetchFailed(error))
         // pass the response to json
         .then((response) => response.json())
         // map our data
@@ -98,7 +97,8 @@ function fetchData() {
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
             redraw();
             errorOverlay.style.display = "block";
-        });
+        })
+        .catch((error) => fetchFailed(error));
 }
 
 const intervalID = setInterval(fetchData, 500);
