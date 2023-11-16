@@ -1,3 +1,6 @@
+var retriesLeft = 3;
+var errorOverlay = document.getElementById("error-overlay");
+var errorReport = document.getElementById("errorReport");
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var xPos = document.getElementById("xPos");
@@ -22,12 +25,28 @@ const handleErrors = (response) => {
     return response.blob();
 };
 
+const fetchFailed = (error) => {
+    errorOverlay.style.display = "block";
+    if (retriesLeft > 0) {
+        errorReport.textContent = "Retrying" + ".".repeat(4 - retriesLeft);
+        console.log(
+            "Error occured while trying to fetch resource. Remaining retries left: " +
+                retriesLeft
+        );
+        retriesLeft -= 1;
+        return;
+    }
+    errorReport.textContent =
+        "After resolving the problem, please reload the page";
+    clearInterval(intervalID);
+};
+
 function fetchData() {
     fetch(location_endpoint)
         // Error handling
         .then(handleErrors)
         .then((response) => console.log("ok"))
-        .catch((error) => console.log(error))
+        .catch((error) => fetchFailed(error))
         // pass the response to json
         .then((response) => response.json())
         // map our data
@@ -79,9 +98,7 @@ function fetchData() {
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
             redraw();
         })
-        .catch((error) => {
-            console.error("Error fetching data: ", error);
-        });
+        .then((errorOverlay.style.display = "block"));
 }
 
-setInterval(fetchData, 500);
+const intervalID = setInterval(fetchData, 500);
