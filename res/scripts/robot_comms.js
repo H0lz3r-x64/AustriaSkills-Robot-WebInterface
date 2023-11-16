@@ -97,8 +97,8 @@ function fetchData() {
 
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
             redraw();
-        })
-        .then((errorOverlay.style.display = "block"));
+            errorOverlay.style.display = "block";
+        });
 }
 
 const intervalID = setInterval(fetchData, 500);
