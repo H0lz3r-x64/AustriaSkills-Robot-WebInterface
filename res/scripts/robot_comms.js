@@ -25,7 +25,7 @@ const handleErrors = (response) => {
         throw Error(`HTTP error! Status: ${response.statusText}`);
     }
     console.log("response ok");
-    return response.blob();
+    return response;
 };
 
 const fetchFailed = (error) => {
