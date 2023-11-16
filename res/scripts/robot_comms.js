@@ -50,6 +50,7 @@ function fetchData() {
         // Error handling
         .then(handleErrors)
         // pass the response to json
+        .then((response) => response.json())
         // map our data
         .then((data) => {
             ctx.fillStyle = "red";
@@ -57,8 +58,8 @@ function fetchData() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             lastLocation = [
-                scaleValue(data.X, upScale),
-                scaleValue(data.Y, upScale),
+                scaleValue(data.xPos, upScale),
+                scaleValue(data.yPos, upScale),
             ];
 
             xPos.innerHTML = parseInt(data.xPos) + " mm";
@@ -74,8 +75,8 @@ function fetchData() {
             USSensorRight.innerHTML = parseFloat(data.USSensorRight) + " mm";
             lineFollowerSensor.innerHTML = data.lineFollowerSensor;
 
-            var centerX = scaleValue(data.X, upScale);
-            var centerY = scaleValue(data.Y, upScale);
+            var centerX = scaleValue(data.xPos, upScale);
+            var centerY = scaleValue(data.yPos, upScale);
             var radius = 14;
 
             var points = [];
@@ -97,7 +98,6 @@ function fetchData() {
             ctx.stroke();
 
             ctx.fillRect(centerX - 5 / 2, centerY - 5 / 2, 5, 5);
-            redraw();
             errorOverlay.style.display = "none";
         })
         .catch((error) => fetchFailed(error));
