@@ -118,23 +118,26 @@ function addDotToList(x, y) {
 let playStopBtn = document.getElementById("playstop-button");
 
 playStopBtn.addEventListener("change", function (event) {
-    if (event.currentTarget.checked) {
-        while (!goalsToPost.isEmpty) {
-            var goal = goalsToPost.dequeue();
+    // Start not in use since the robot will solely be started via the ControlStation
+    // if (event.currentTarget.checked) {
+    //     while (!goalsToPost.isEmpty) {
+    //         var goal = goalsToPost.dequeue();
 
-            postGoal(goal[0], goal[1]);
-        }
-        console.log("Start");
-    } else {
-        const url = "http://10.12.34.2:3000/stop";
+    //         postGoal(goal[0], goal[1]);
+    //     }
+    //     console.log("Start");
+    //     return;
+    // }
 
-        fetch(url, {
-            method: "GET",
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-        console.log("Stop");
-    }
+    // stop functioniality
+    const url = "http://10.12.34.2:3000/stop";
+
+    fetch(url, {
+        method: "GET",
+    })
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    console.log("Stop");
 });
