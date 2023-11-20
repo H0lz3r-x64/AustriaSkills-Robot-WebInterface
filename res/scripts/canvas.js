@@ -1,9 +1,8 @@
 var RobotRender = new Image();
 var xElement = document.getElementById("xPos");
 var yElement = document.getElementById("yPos");
-var lastX = 0;
-var lastY = 0;
-const robot_path = [[]];
+var rotElement = document.getElementById("rot");
+const robot_path = [];
 
 console.log("canvas");
 var ox = 0,
@@ -14,8 +13,8 @@ var ox = 0,
     scy = 1;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-ctx.lineWidth = 20;
-ctx.strokeStyle = "#ff0000";
+ctx.imageSmoothingEnabled = true;
+ctx.imageSmoothingQuality = "high";
 
 // not working StylePropertyMapReadOnly, so not in use
 // canvas.onmousedown = (e) => {
@@ -46,26 +45,95 @@ ctx.strokeStyle = "#ff0000";
 
 function draw() {
     window.requestAnimationFrame(draw);
-    ctx.clearRect(lastX, lastY, 500 * scx, 500 * scy);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     var x = parseInt(xElement.innerHTML);
     var y = parseInt(yElement.innerHTML);
+    var rot = parseInt(rotElement.innerHTML);
+
+    // return if x or y not valid yet
+    if (typeof x == "undefined" || isNaN(x)) {
+        return;
+    }
+    if (typeof y == "undefined" || isNaN(y)) {
+        return;
+    }
+    // translate to screen cords
     [x, y] = WtoS(x, y);
-    lastX = x;
-    lastY = y;
-
+    // push the center of the current robots sceeen space point
     robot_path.push([x + (500 * scx) / 2, y + (500 * scy) / 2]);
-    ctx.beginPath();
-    ctx.moveTo(robot_path[0][0], robot_path[0][1]);
 
+    if (draw_path) {
+        drawRobotPath();
+    }
+
+    // draw actual robot render with rotation
+    drawRotatedImage(ctx, RobotRender, x, y, 500 * scx, 500 * scy, rot);
+    // reset rotation
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // is much quicker than save and restore
+}
+
+/**
+ * The function `drawRobotPath` is used to draw the path of the robot on a canvas element in JavaScript.
+ */
+function drawRobotPath() {
+    // draw the robot's path
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 10;
+
+    ctx.moveTo(robot_path[0][0], robot_path[0][1]);
     robot_path.forEach((value) => {
-        console.log(value[0], value[1]);
         ctx.lineTo(value[0], value[1]);
         ctx.moveTo(value[0], value[1]);
     });
     ctx.stroke();
-    ctx.drawImage(RobotRender, x, y, 500 * scx, 500 * scy);
+    // draw robots starting point or at least it's point after site load
+    ctx.beginPath();
+    ctx.strokeStyle = "#ff0000";
+    ctx.arc(
+        robot_path[0][0],
+        robot_path[0][1],
+        ctx.lineWidth * 2,
+        0,
+        2 * Math.PI,
+        false
+    );
+    ctx.strokeStyle = "black";
+    ctx.fill();
+    ctx.stroke();
 }
 
+/**
+ * The function `drawRotatedImage` takes a canvas context, an image, coordinates, dimensions, and
+ * rotation angle, and draws the image rotated on the canvas.
+ * @param ctx - The ctx parameter is the 2D rendering context of the canvas element on which you want
+ * to draw the rotated image.
+ * @param image - The "image" parameter refers to the image object that you want to draw on the canvas.
+ * This can be an HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, or ImageBitmap object.
+ * @param x - The x parameter represents the x-coordinate of the top-left corner of the image on the
+ * canvas.
+ * @param y - The parameter "y" represents the y-coordinate of the top-left corner of the image on the
+ * canvas.
+ * @param w - The parameter "w" represents the width of the image.
+ * @param h - The parameter "h" in the function "drawRotatedImage" represents the height of the image
+ * that you want to draw.
+ * @param degrees - The "degrees" parameter in the "drawRotatedImage" function represents the angle of
+ * rotation in degrees. It determines how much the image will be rotated clockwise around its center
+ * point.
+ */
+
+function drawRotatedImage(ctx, image, x, y, w, h, degrees) {
+    ctx.save();
+    ctx.translate(x + w / 2, y + h / 2);
+    ctx.rotate((degrees * Math.PI) / 180.0);
+    ctx.translate(-x - w / 2, -y - h / 2);
+    ctx.drawImage(image, x, y, w, h);
+    ctx.restore();
+}
+
+/* The code `RobotRender.onload = draw;` sets the `onload` event handler for the `RobotRender` image.
+When the image is loaded, the `draw` function will be called to start rendering the image on the
+canvas. */
 RobotRender.onload = draw;
 RobotRender.src = "./res/images/robot_render.svg";
 

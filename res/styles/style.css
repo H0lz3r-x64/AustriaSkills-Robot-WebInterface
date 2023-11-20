@@ -56,6 +56,12 @@ body {
     border-color: #029aa9;
     box-shadow: 0px 0px 225.2px 195px #ffffff1a, 0px 4px 132.5px 5px #029ba96b;
     border: 1px solid;
+    image-rendering: optimizeSpeed; /* Legal fallback                 */
+    image-rendering: -moz-crisp-edges; /* Firefox                        */
+    image-rendering: -o-crisp-edges; /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: crisp-edges; /* CSS3 Proposed                  */
+    -ms-interpolation-mode: bicubic;
 }
 
 .title-bar-buttons {
@@ -352,4 +358,10 @@ td:nth-child(3) {
 
 .checkbox-show input:checked + span {
     background-image: url("../images/eye.svg");
+}
+
+.extended-checkbox {
+    padding: 0.5rem;
+    text-align: center;
+    vertical-align: center;
 }
