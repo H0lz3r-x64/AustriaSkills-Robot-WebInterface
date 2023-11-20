@@ -45,7 +45,14 @@
 
             <div class="content">
                 <div class="display-area">
-                    <canvas id="canvas" class="rectangle"></canvas>
+                    <canvas
+                        id="canvas"
+                        width="2000"
+                        height="4000"
+                        class="rectangle"
+                    >
+                        Your browser does not support the canvas element.
+                    </canvas>
                 </div>
                 <div class="side-bar">
                     <div class="sidebar-items">
@@ -202,5 +209,6 @@
     </body>
     <script src="./res/scripts/Queue.js"></script>
     <script src="./res/scripts/script.js"></script>
-    <script src="./res/scripts/robot_comms.js"></script>
+    <script src="./res/scripts/canvas.js"></script>
+    <script src="./res/scripts/robot_comms.js" defer="defer"></script>
 </html>

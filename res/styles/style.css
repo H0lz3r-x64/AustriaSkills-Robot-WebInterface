@@ -50,6 +50,7 @@ body {
 
 .rectangle {
     height: 70vh;
+    overflow: scroll;
     aspect-ratio: 2/4;
     background-color: #ffffff;
     border-color: #029aa9;
