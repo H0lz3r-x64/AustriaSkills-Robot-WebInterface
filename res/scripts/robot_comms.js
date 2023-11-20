@@ -16,8 +16,8 @@ var USSensorRight = document.getElementById("USSensorRight");
 var lineFollowerSensor = document.getElementById("lineFollowerSensor");
 
 // us this one for localhost debugging
-// const location_endpoint = "http://127.0.0.1:5000/robot_status";
-const location_endpoint = "http://10.12.34.2:3000/robot_status";
+const location_endpoint = "http://127.0.0.1:5000/robot_status";
+// const location_endpoint = "http://10.12.34.2:3000/robot_status";
 
 const handleErrors = (response) => {
     if (!response.ok) {
@@ -60,8 +60,8 @@ function fetchData() {
             carriagePosition.innerHTML =
                 parseFloat(data.carriagePosition) + "/100 %";
             gripperStatus.innerHTML = data.gripperStatus;
-            IRSensorLeft.innerHTML = parseFloat(data.IRSensorLeft);
-            IRSensorRight.innerHTML = parseFloat(data.IRSensorRight);
+            IRSensorLeft.innerHTML = parseFloat(data.IRSensorLeft) + " mm";
+            IRSensorRight.innerHTML = parseFloat(data.IRSensorRight) + " mm";
             USSensorLeft.innerHTML = parseFloat(data.USSensorLeft) + " mm";
             USSensorRight.innerHTML = parseFloat(data.USSensorRight) + " mm";
             lineFollowerSensor.innerHTML = data.lineFollowerSensor;
