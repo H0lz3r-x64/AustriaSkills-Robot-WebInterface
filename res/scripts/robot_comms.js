@@ -16,8 +16,8 @@ var USSensorRight = document.getElementById("USSensorRight");
 var lineFollowerSensor = document.getElementById("lineFollowerSensor");
 
 // us this one for localhost debugging
-const location_endpoint = "http://127.0.0.1:5000/robot_status";
-// const location_endpoint = "http://10.12.34.2:3000/robot_status";
+// const location_endpoint = "http://127.0.0.1:5000/robot_status";
+const location_endpoint = "http://10.12.34.2:3000/robot_status";
 
 const handleErrors = (response) => {
     if (!response.ok) {

@@ -13,7 +13,6 @@ var ox = 0,
     py = 0,
     scx = 1,
     scy = 1;
-debugger;
 
 var ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = true;
@@ -63,17 +62,32 @@ function draw() {
 
     // translate to screen cords
     [x, y] = WtoS(x, y);
+    let robWidth = 500 * scx,
+        robHeight = 500 * scy;
+
+    let robCornerDrawX = x - robWidth / 2,
+        robCornerDrawY = y - robHeight / 2;
     // push the center of the current robots sceeen space point
-    robot_path.push([x + (500 * scx) / 2, y + (500 * scy) / 2]);
+    robot_path.push([robCornerDrawX, robCornerDrawY]);
 
     if (draw_path) {
         drawRobotPath();
     }
 
     // draw actual robot render with rotation
-    drawRotatedImage(ctx, RobotRender, x, y, 500 * scx, 500 * scy, rot);
+    drawRotatedImage(
+        ctx,
+        RobotRender,
+        robCornerDrawX,
+        robCornerDrawY,
+        robWidth,
+        robHeight,
+        rot
+    );
+
     // reset rotation
     ctx.setTransform(1, 0, 0, 1, 0, 0); // is much quicker than save and restore
+    debugger;
 }
 
 /**
