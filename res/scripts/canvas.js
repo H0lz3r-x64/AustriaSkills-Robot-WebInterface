@@ -2,16 +2,19 @@ var RobotRender = new Image();
 var xElement = document.getElementById("xPos");
 var yElement = document.getElementById("yPos");
 var rotElement = document.getElementById("rot");
+var canvas = document.getElementById("canvas");
+
 const robot_path = [];
 
 console.log("canvas");
 var ox = 0,
-    oy = 0,
+    oy = canvas.height,
     px = 0,
     py = 0,
     scx = 1,
     scy = 1;
-var canvas = document.getElementById("canvas");
+debugger;
+
 var ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = true;
 ctx.imageSmoothingQuality = "high";
@@ -57,6 +60,7 @@ function draw() {
     if (typeof y == "undefined" || isNaN(y)) {
         return;
     }
+
     // translate to screen cords
     [x, y] = WtoS(x, y);
     // push the center of the current robots sceeen space point
@@ -138,17 +142,19 @@ RobotRender.onload = draw;
 RobotRender.src = "./res/images/robot_render.svg";
 
 /**
- * The function WtoS converts world coordinates (wx, wy) to screen coordinates (sx, sy) using scaling
- * factors (scx, scy) and an origin point (ox, oy).
+ * The function WtoS converts world coordinates (wx, wy) to screen coordinates (sx, sy) in a HTML5
+ * canvas.
  * @param wx - The parameter "wx" represents the x-coordinate in the world coordinate system.
  * @param wy - The parameter "wy" represents the y-coordinate in the world coordinate system.
- * @returns an array containing the values of `sx` and `sy`.
+ * @returns an array containing the calculated values of `sx` and `sy`.
  */
 function WtoS(wx, wy) {
     let lox = ox;
     let loy = oy;
-    let sx = (wx - lox) * scx;
-    let sy = (wy - loy) * scy;
+    // formulars this way since the actual html5 canvas origin (0,0) is left upper corner, we want it in the left lower corner tho
+    // also necessary to set oy to the canvas height prior
+    let sx = (lox + wx) * scx; // add world x to origin x to achieve an world x increase showing as direction right
+    let sy = (loy - wy) * scy; // substract world y from origin y to achieve an world y increase showing as direction up
     return [sx, sy];
 }
 
@@ -162,6 +168,6 @@ function StoW(sx, sy) {
     let lox = ox;
     let loy = oy;
     let wx = sx / scx + lox;
-    let wy = sy / scy + loy;
+    let wy = sy / scy - loy; //untested
     return [wx, wy];
 }
