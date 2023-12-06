@@ -65,10 +65,11 @@ function draw() {
     let robWidth = 500 * scx,
         robHeight = 500 * scy;
 
+    // push current robots sceeen space points
+    robot_path.push([x, y]);
+
     let robCornerDrawX = x - robWidth / 2,
         robCornerDrawY = y - robHeight / 2;
-    // push the center of the current robots sceeen space point
-    robot_path.push([robCornerDrawX, robCornerDrawY]);
 
     if (draw_path) {
         drawRobotPath();
