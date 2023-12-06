@@ -1,42 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>KNAPP Austriaskills Robot GUI</title>
-</head>
-<body>
-    <header>
-        <h1>Robot Control</h1>
-    </header>
-    <div class="container">
-        <section class="input">
-            <div class="goal">
-                <form id="goalForm">
-                    <h2>Set Goal</h2>
-                    <label for="goalX">X</label>
-                    <input class="coordinateInput" id="goalX" type="number" placeholder="0" max="4000" required>
-                    <label for="goalY">Y</label>
-                    <input class="coordinateInput" id="goalY" type="number" placeholder="0" max="2000" required>
-                    <button class="submitForm" type="submit">Create Goal</button>
-                    <button id="startButton" class="submitForm" type="button">Start</button>
-                </form>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Austria Skills - KNAPP Robot Interface</title>
+
+        <link rel="stylesheet" href="./res/styles/globals.css" />
+        <link rel="stylesheet" href="./res/styles/style.css" />
+    </head>
+    <body>
+        <div id="errorOverlay" class="error-overlay">
+            <div>
+                <p>Error with fetching data from robot!</p>
+                <br />
+                <br />
+                <span id="errorReport"></span>
             </div>
-            <form id="robotForm">
-                <h2>Robot Position</h2>
-                <label for="robotX">X</label>
-                <input class="coordinateInput" id="robotX" type="number" placeholder="0" max="4000" required>
-                <label for="robotY">Y</label>
-                <input class="coordinateInput" id="robotY" type="number" placeholder="0" max="4000" required>
-                <button class="submitForm" type="submit">Set Robot Position</button>
-            </form>
-        </section>
-        <section class="omsStatus">
-            <h2>OMS Status</h2>
-        </section>
-        <div class="canvasContainer">
-            <button id="stopButton" type="button">STOP</button>
-            <canvas id="canvas" width="800" height="400"></canvas>
         </div>
-    </div>
-</body>
+        <div class="site">
+            <div class="title-bar">
+                <img class="KNAPP-logo" src="./res/images/knapp-logo-1.svg" />
+                <div class="header-text">KNAPP ROBOT INTERFACE</div>
+                <div class="title-bar-buttons">
+                    <!-- battery display -->
+                    <img
+                        class="battery-display"
+                        src="./res/images/battery-display.svg"
+                    />
+                    <!-- play & stop button -->
+                    <div class="playstop-button shine-effect">
+                        <label
+                            ><input
+                                type="checkbox"
+                                id="playstop-button" /><span></span
+                        ></label>
+                    </div>
+
+                    <!-- manual control button -->
+                    <img
+                        class="round-action-button shine-effect"
+                        src="./res/images/controller-btn.svg"
+                    />
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="display-area">
+                    <canvas
+                        id="canvas"
+                        width="2000"
+                        height="4000"
+                        class="rectangle"
+                    >
+                        Your browser does not support the canvas element.
+                    </canvas>
+                </div>
+                <div class="side-bar">
+                    <div class="sidebar-items">
+                        <table>
+                            <tr>
+                                <th colspan="3">Pose</th>
+                            </tr>
+
+                            <tr>
+                                <td>X-Position</td>
+                                <td id="xPos"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="X-Position graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Y-Position</td>
+                                <td id="yPos"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Y-Position graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Rotation</td>
+                                <td id="rot"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Rotation graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Show Robot Path</td>
+                                <td colspan="2" style="padding: 0;">
+                                    <div
+                                        class="checkbox-show shine-effect"
+                                        style="height: 28px;"
+                                    >
+                                        <label
+                                            ><input
+                                                id="robot-path"
+                                                type="checkbox"
+                                                value="1"
+                                                name="Robot Path graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <th colspan="3">OMS</th>
+                            </tr>
+                            <tr>
+                                <td>Elevator-Position</td>
+                                <td id="elevatorPosition"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Elevator-Position graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carriage-Position</td>
+                                <td id="carriagePosition"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Carriage-Position graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gripper-Status</td>
+                                <td id="gripperStatus"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Gripper-Statusm graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <th colspan="3">Sensors</th>
+                            </tr>
+                            <tr>
+                                <td>IR-Sensor(Left)</td>
+                                <td id="IRSensorLeft"></td>
+                                <td rowspan="4">
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="IR-Sensor graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>IR-Sensor(Right)</td>
+                                <td id="IRSensorRight"></td>
+                            </tr>
+
+                            <tr>
+                                <td>US-Sensor(Left)</td>
+                                <td id="USSensorLeft"></td>
+                            </tr>
+
+                            <tr>
+                                <td>US-Sensor(Right)</td>
+                                <td id="USSensorRight"></td>
+                            </tr>
+                            <tr>
+                                <td>Line Follower Sensor</td>
+                                <td id="lineFollowerSensor"></td>
+                                <td>
+                                    <div class="checkbox-show shine-effect">
+                                        <label
+                                            ><input
+                                                type="checkbox"
+                                                value="1"
+                                                name="Line-Follower-Sensor graphic" /><span></span
+                                        ></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img
+            class="network-background"
+            src="./res/images/KNAPP_Netzwerk_V1.png"
+        />
+    </body>
+    <script src="./res/scripts/script.js"></script>
+    <script src="./res/scripts/canvas.js"></script>
+    <script src="./res/scripts/robot_comms.js" defer="defer"></script>
 </html>
