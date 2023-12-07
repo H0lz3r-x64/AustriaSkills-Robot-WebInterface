@@ -25,9 +25,8 @@ Here are some screenshots of the web interface in action:
 
 ![image](https://github.com/H0lz3r-x64/AustriaSkills-Robot-WebInterface/assets/91200978/711cdf17-a284-4856-be68-548322957a26)
 
-<p align="right"><a href="#readme-top">▲</a></p>
 
-## How to run
+<h2>How to run <img align="right" height="30" href="#readme-top" src="https://user-images.githubusercontent.com/84743905/174507937-c8637dd7-5a10-4c12-bf23-945c7872ace2.png"> </h2>
 
 To run the web interface, you need to do the following steps:
 
