@@ -25,6 +25,8 @@ Here are some screenshots of the web interface in action:
 
 ![image](https://github.com/H0lz3r-x64/AustriaSkills-Robot-WebInterface/assets/91200978/711cdf17-a284-4856-be68-548322957a26)
 
+<p align="right"><a href="#readme-top">▲</a></p>
+
 ## How to run
 
 To run the web interface, you need to do the following steps:
@@ -35,4 +37,4 @@ To run the web interface, you need to do the following steps:
 - To simulate the robot, you can use the [AustriaSkills-Robot-ResponseSimulate](https://github.com/H0lz3r-x64/AustriaSkills-Robot-ResponseSimulate) python script, which will host a flask development server and  send fake data to the web interface.
 - Make sure to change the `location_endpoint` variable in the [robot_comms.js](https://github.com/H0lz3r-x64/AustriaSkills-Robot-WebInterface/blob/main/res/scripts/robot_comms.js) file to match the URL of your flask development server that runs the python script.
 
-<p align="right">#<a href="#readme-top">back to top</a></p>
+
