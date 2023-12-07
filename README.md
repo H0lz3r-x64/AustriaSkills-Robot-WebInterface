@@ -1,3 +1,4 @@
+<a name="readme-top"></a>
 # AustriaSkills-Robot-WebInterface
 This project is a web interface for the Austria Skills Robot, a robot that was designed and built by my colleagues for the Austria Skills competition. The web interface allows you to monitor and control the robot remotely using a web browser.
 
@@ -33,3 +34,5 @@ To run the web interface, you need to do the following steps:
 - Open your web browser and go to your localhost url or the other machines url.
 - To simulate the robot, you can use the [AustriaSkills-Robot-ResponseSimulate](https://github.com/H0lz3r-x64/AustriaSkills-Robot-ResponseSimulate) python script, which will host a flask development server and  send fake data to the web interface.
 - Make sure to change the `location_endpoint` variable in the [robot_comms.js](https://github.com/H0lz3r-x64/AustriaSkills-Robot-WebInterface/blob/main/res/scripts/robot_comms.js) file to match the URL of your flask development server that runs the python script.
+
+<p align="right">#<a href="#readme-top">back to top</a></p>
